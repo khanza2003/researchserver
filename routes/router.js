@@ -36,7 +36,6 @@ const userController = require('../controllers/userController');
 const researchController = require('../controllers/researchController');
 const jwtMiddleware = require('../middlewares/jwtMiddleware');
 const multerMiddleware = require('../middlewares/multerMiddleware');
-const reviewController =require('../controllers/reviewController')
 const router = new express.Router();
 
 // Register - POST
@@ -67,17 +66,18 @@ router.put('/user/edit', jwtMiddleware, multerMiddleware.single("profilePic"), u
 //Get Research According to category
 router.get('/research', researchController.getResearchByCategoryController);
 
-// // Add a new review
-// router.post('/review', jwtMiddleware, reviewController.addReview);
-
-// // Update a review
-// router.put('/review/:id', jwtMiddleware, reviewController.updateReview);
-
-// // Delete a review
-// router.delete('/review/:id', jwtMiddleware, reviewController.deleteReview);
-
 // Add route for getting top 3 active users
 router.get('/top-active-users', multerMiddleware.single("profilePic"),researchController.getTopActiveUsersController);
+
+
+// Add to Favorites
+router.post('/add-favorite', jwtMiddleware, researchController.addToFavoriteController);
+
+// Remove from Favorites
+router.post('/remove-favorite', jwtMiddleware, researchController.removeFromFavoriteController);
+
+// Get User's Favorite Research
+router.get('/favorite-research', jwtMiddleware, researchController.getFavoriteResearchController);
 
 
 

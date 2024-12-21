@@ -178,3 +178,44 @@ exports.getTopActiveUsersController = async (req, res) => {
     }
 };
 
+// Add to Favorites
+exports.addToFavoriteController = async (req, res) => {
+    const { researchId } = req.body;
+    try {
+        const updatedResearch = await Research.findByIdAndUpdate(
+            researchId,
+            { isFavorite: true },
+            { new: true }
+        );
+        res.status(200).json(updatedResearch);
+    } catch (err) {
+        res.status(400).json({ message: "Error adding to favorites", error: err });
+    }
+};
+
+// Remove from Favorites
+exports.removeFromFavoriteController = async (req, res) => {
+    const { researchId } = req.body;
+    try {
+        const updatedResearch = await Research.findByIdAndUpdate(
+            researchId,
+            { isFavorite: false },
+            { new: true }
+        );
+        res.status(200).json(updatedResearch);
+    } catch (err) {
+        res.status(400).json({ message: "Error removing from favorites", error: err });
+    }
+};
+
+// Get User's Favorite Research
+exports.getFavoriteResearchController = async (req, res) => {
+    const userId = req.userId;  // User's ID from JWT middleware
+    try {
+        const favoriteResearch = await Research.find({ userId, isFavorite: true });
+        res.status(200).json(favoriteResearch);
+    } catch (err) {
+        res.status(400).json({ message: "Error fetching favorite research", error: err });
+    }
+};
+

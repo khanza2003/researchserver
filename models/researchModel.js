@@ -21,6 +21,10 @@ const researchSchema = new mongoose.Schema({
     userId: {
         type: String,
         required: true
+    },
+    isFavorite: {
+        type: Boolean,
+        default: false // New field to indicate if a research item is a favorite
     }
 });
 

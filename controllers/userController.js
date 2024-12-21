@@ -21,7 +21,6 @@ exports.registerController = async (req, res) => {
                 password,
                 phone: "",
                 address: "",
-                dateOfBirth: "",
                 education: "",
                 profilePic: ""
             });
@@ -30,6 +29,8 @@ exports.registerController = async (req, res) => {
         }
     } catch (err) {
         res.status(401).json(err);
+        console.log(err);
+        
     }
 }
 
@@ -78,7 +79,6 @@ exports.editUserController = async (req, res) => {
                 password,
                 phone,
                 address,
-                dateOfBirth,
                 education,
                 profilePic: uploadProfileImgFile
             },
@@ -90,5 +90,8 @@ exports.editUserController = async (req, res) => {
         res.status(401).json(err);
     }
 }
+
+
+  
 
 

@@ -20,19 +20,15 @@ const userSchema = new mongoose.Schema({
     },
     phone: {
         type: String,
-        required: true
+        required: false
     },
     address: {
         type: String,
-        required: true
-    },
-    dateOfBirth: {
-        type: Date,
-        required: true
+        required: false
     },
     education: {
         type: String,
-        required: true
+        required: false
     },
     profilePic: {
         type: String,
